@@ -46,8 +46,22 @@ namespace FormScore
         private void FillTable()
         {
             filteredGames = controller.GetFilteredGames(cbOrder.Text);
+            DataTable games = new DataTable("Best Games");
+            games.Columns.Add(new DataColumn("Player"));
+            games.Columns.Add(new DataColumn("Mistakes"));
+            games.Columns.Add(new DataColumn("Duration"));
+            games.Columns.Add(new DataColumn("Date"));
+            foreach (var game in filteredGames)
+            {
+                DataRow row = games.NewRow();
+                row["Best Games"] = Controller.entities.Where
+            }
+
+
             List<object> displayList = controller.GetDisplayList(filteredGames);
             dgvGames.DataSource = displayList;
         }
+
+
     }
 }
