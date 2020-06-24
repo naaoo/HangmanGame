@@ -71,9 +71,9 @@
             // 
             this.lblPlayer.AutoSize = true;
             this.lblPlayer.Font = new System.Drawing.Font("Tahoma", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayer.Location = new System.Drawing.Point(210, 152);
+            this.lblPlayer.Location = new System.Drawing.Point(200, 157);
             this.lblPlayer.Name = "lblPlayer";
-            this.lblPlayer.Size = new System.Drawing.Size(110, 36);
+            this.lblPlayer.Size = new System.Drawing.Size(88, 29);
             this.lblPlayer.TabIndex = 13;
             this.lblPlayer.Text = "Player";
             // 
@@ -81,7 +81,7 @@
             // 
             this.lblName.AutoSize = true;
             this.lblName.Font = new System.Drawing.Font("Tahoma", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(224, 197);
+            this.lblName.Location = new System.Drawing.Point(220, 199);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(53, 21);
             this.lblName.TabIndex = 14;

@@ -64,6 +64,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormScore.resx">
+      <DependentUpon>FormScore.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -88,6 +91,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HangmanData\HangmanData.csproj">
+      <Project>{CD446A77-5B55-41A6-AAD1-4AC798303193}</Project>
+      <Name>HangmanData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HangmanLogic\HangmanLogic.csproj">
       <Project>{1f5cee88-0dc3-4e7a-9f5b-fd6678f77a49}</Project>
       <Name>HangmanLogic</Name>

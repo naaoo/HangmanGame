@@ -15,10 +15,13 @@ namespace FormAdd
     {
         Controller controller = Controller.GetInstance();
         Action showParentForm;
-        public FormAdd(Action action)
+        Action updateParentForm;
+        public FormAdd(Action action, Action action2)
         {
             InitializeComponent();
             showParentForm = action;
+            updateParentForm = action2;
+
         }
 
         public FormAdd()
@@ -44,6 +47,7 @@ namespace FormAdd
 
         private void btnBack_Click(object sender, EventArgs e)
         {
+            updateParentForm.Invoke();
             showParentForm.Invoke();
             Close();
         }

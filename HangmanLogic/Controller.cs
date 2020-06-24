@@ -66,11 +66,11 @@ namespace HangmanLogic
         public bool AddWord(string wordString)
         {
             var diff = "";
-            if (wordString.Length < 8)
+            if (wordString.Length < 10)
             {
                 diff = "E";
             }
-            else if (wordString.Length > 7 && wordString.Length < 12)
+            else if (wordString.Length > 9 && wordString.Length < 15)
             {
                 diff = "N";
             }
@@ -88,6 +88,31 @@ namespace HangmanLogic
             {
                 return false;
             }
+        }
+
+        public List<Game> GetFilteredGames(string orderMode)
+        {
+            var list = new List<Game>();
+            if (orderMode == "mistakes")
+            {
+                list = entities.Game.Where(x => x.won == true).OrderBy(x => x.mistakes).Take(10).ToList();
+            }
+            else if (orderMode == "duration")
+            {
+                list = entities.Game.Where(x => x.won == true).OrderBy(x => x.duration).Take(10).ToList();
+            }
+            return list;
+        }
+
+        public List<object> GetDisplayList(List<Game> games)
+        {
+            List<object> list = new List<object>();
+            foreach (var game in games)
+            {
+                Player player = entities.Player.Where(x => x.id == game.player_id).FirstOrDefault();
+                list.Add(new object() { Player =  })
+            }
+            return list;
         }
     }
 }

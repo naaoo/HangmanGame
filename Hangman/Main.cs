@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using HangmanLogic;
+using HangmanData;
 
 namespace Hangman
 {
@@ -43,7 +44,7 @@ namespace Hangman
         }
         private void FillDifficulties()
         {
-            cbDifficulty.DataSource = new List<string>() { "Easy", "Normal", "Hard" }; ;
+            cbDifficulty.DataSource = new List<string>() { "Easy", "Normal", "Hard" };
         }
 
         /// <summary>
@@ -53,10 +54,11 @@ namespace Hangman
         /// <param name="e"></param>
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            FormGame.FormGame formGame = new FormGame.FormGame();
+            var player = cbPlayer.SelectedItem as Player;
+            var diff = cbDifficulty.SelectedItem.ToString().Substring(0, 1).ToUpper();
+            FormGame.FormGame formGame = new FormGame.FormGame(Show, player, diff, picPath);
             formGame.Show();
             Hide();
-
         }
 
         /// <summary>
@@ -66,7 +68,7 @@ namespace Hangman
         /// <param name="e"></param>
         private void btnAddClick(object sender, EventArgs e)
         {
-            FormAdd.FormAdd formAdd = new FormAdd.FormAdd(Show);
+            FormAdd.FormAdd formAdd = new FormAdd.FormAdd(Show, FillPlayers);
             formAdd.Show();
             Hide();
         }
@@ -78,7 +80,7 @@ namespace Hangman
         /// <param name="e"></param>
         private void btnView_Click(object sender, EventArgs e)
         {
-            FormScore.FormScore formScore = new FormScore.FormScore();
+            FormScore.FormScore formScore = new FormScore.FormScore(Show);
             formScore.Show();
             Hide();
         }
