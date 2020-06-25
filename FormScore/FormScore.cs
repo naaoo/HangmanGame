@@ -16,7 +16,7 @@ namespace FormScore
     {
         Action showParentForm;
 
-        Controller controller = Controller.GetInstance();
+        public Controller controller = Controller.GetInstance();
         List<Game> filteredGames;
 
         public FormScore()
@@ -28,7 +28,8 @@ namespace FormScore
         {
             InitializeComponent();
             showParentForm = action;
-            cbOrder.DataSource = new List<string>() { "mistakes", "duration" };
+            cbOrder.DataSource = new List<string>() { "Mistakes", "Duration" };
+            cbDifficulty.DataSource = new List<string>() { "Easy", "Normal", "Hard" };
             FillTable();
         }
 
@@ -45,23 +46,28 @@ namespace FormScore
 
         private void FillTable()
         {
-            filteredGames = controller.GetFilteredGames(cbOrder.Text);
+            filteredGames = controller.GetFilteredGames(cbOrder.Text, cbDifficulty.Text);
+            List<List<string>> displayList = controller.GetDisplayList(filteredGames);
             DataTable games = new DataTable("Best Games");
             games.Columns.Add(new DataColumn("Player"));
             games.Columns.Add(new DataColumn("Mistakes"));
             games.Columns.Add(new DataColumn("Duration"));
             games.Columns.Add(new DataColumn("Date"));
-            foreach (var game in filteredGames)
+            foreach (var game in displayList)
             {
                 DataRow row = games.NewRow();
-                row["Best Games"] = Controller.entities.Where
+                row["Player"] = game[0];
+                row["Mistakes"] = game[1];
+                row["Duration"] = game[2];
+                row["Date"] = game[3];
+                games.Rows.Add(row);
             }
-
-
-            List<object> displayList = controller.GetDisplayList(filteredGames);
-            dgvGames.DataSource = displayList;
+            dgvGames.DataSource = games;
         }
 
-
+        private void cbDifficulty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillTable();
+        }
     }
 }

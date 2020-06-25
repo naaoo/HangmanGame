@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Media;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -95,7 +96,7 @@ namespace FormGame
             }
             else
             {
-                MessageBox.Show("Game over!\nTime: " + game.duration + "\nMistakes: " + game.mistakes);
+                MessageBox.Show("Game over!\nTime: " + game.duration + "s\nMistakes: " + game.mistakes);
             }
             showParentForm.Invoke();
             Close();
@@ -111,9 +112,25 @@ namespace FormGame
         private void EnterLetter()
         {
             char enteredChar = tbLetter.Text.ToLower().ToCharArray()[0];
-            enteredChars.Add(enteredChar);
-            gameController.CheckLetter(enteredChar);
-            tbLetter.Text = null;
+            try
+            {
+                if (!Regex.IsMatch(enteredChar.ToString(), @"[a-zäöü]"))
+                {
+                    throw new NoLetterException("not a letter");
+                }
+                else
+                {
+                    enteredChars.Add(enteredChar);
+                    gameController.CheckLetter(enteredChar);
+                    tbLetter.Text = null;
+                }
+            }
+            catch (NoLetterException ex)
+            {
+                MessageBox.Show("Please enter a letter");
+                tbLetter.Text = null;
+            }
+            
         }
     }
 }

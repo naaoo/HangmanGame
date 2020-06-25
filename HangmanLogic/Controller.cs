@@ -90,27 +90,31 @@ namespace HangmanLogic
             }
         }
 
-        public List<Game> GetFilteredGames(string orderMode)
+        public List<Game> GetFilteredGames(string orderMode, string difficulty)
         {
             var list = new List<Game>();
-            if (orderMode == "mistakes")
+            if (orderMode == "Mistakes")
             {
-                list = entities.Game.Where(x => x.won == true).OrderBy(x => x.mistakes).Take(10).ToList();
+                list = entities.Game.Where(x => x.difficulty == difficulty.Substring(0, 1)).
+                    Where(x => x.won == true).OrderBy(x => x.mistakes).Take(10).ToList();
             }
-            else if (orderMode == "duration")
+            else if (orderMode == "Duration")
             {
-                list = entities.Game.Where(x => x.won == true).OrderBy(x => x.duration).Take(10).ToList();
+                list = entities.Game.Where(x => x.difficulty == difficulty.Substring(0, 1)).
+                    Where(x => x.won == true).OrderBy(x => x.duration).Take(10).ToList();
             }
             return list;
         }
 
-        public List<object> GetDisplayList(List<Game> games)
+        public List<List<string>> GetDisplayList(List<Game> games)
         {
-            List<object> list = new List<object>();
+            List<List<string>> list = new List<List<string>>();
             foreach (var game in games)
             {
                 Player player = entities.Player.Where(x => x.id == game.player_id).FirstOrDefault();
-                list.Add(new object() { Player =  })
+                string dateString = game.date.ToString("dd/MM/yyyy");
+                list.Add(new List<string>() { player.name, game.mistakes.ToString(),
+                    game.duration.ToString(), dateString});
             }
             return list;
         }
